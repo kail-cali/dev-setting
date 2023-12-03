@@ -1,0 +1,91 @@
+#!/bin/bash
+
+
+#================================
+#====     framework        ======
+#================================
+
+FRAMEWORK_BIT=0
+DJANGO=1
+SPRING=2
+SOME_FRAMEWORK=4
+
+_root_home='/he'
+_app=''
+_project_home=''
+_project_path=''
+
+function add_framework ()
+{
+	case $1 in
+		dj)
+			FRAMEWORK_BIT=$(( FRAMEWORK_BIT  | DJANGO ))
+			echo add django , current bit $FRAMEWORK_BIT
+			;;
+
+		spring)
+			FRAMEWORK_BIT=$(( FRAMEWORK_BIT  | SPRING ))
+			echo add spring $FRAMEWORK_BIT
+			;;
+
+		*)
+			echo command not found $1, current bit $FRAMEWORK_BIT
+			;;
+	esac
+
+}
+
+
+function switch ()
+{
+	case $1 in
+		dj)
+			FRAMEWORK_BIT=$DJANGO
+			echo add django , current bit $FRAMEWORK_BIT
+			;;
+
+		spring)
+			FRAMEWORK_BIT=$SPRING
+			echo add spring $FRAMEWORK_BIT
+			;;
+
+		*)
+			echo command not found $1, current bit $FRAMEWORK_BIT
+			;;
+	esac
+}
+
+function dev ()
+{
+    # go to specific project home
+    if [ $FRAMEWORK_BIT & $DJANGO == $DJANGO ]; then
+        django_dev $1 $2
+    elif [ $FRAMEWORK_BIT & $SPRING == $SPRING ]; then
+        spring_dev $1 $2 
+    else
+        echo 
+    fi
+}
+
+function django_dev ()
+{
+    echo test django set dev
+    
+}
+
+function spring_dev ()
+{
+   echo test spring set dev
+}
+
+
+
+function set_env ()
+{
+    echo
+}
+
+function init_param ()
+{
+    echo
+}
